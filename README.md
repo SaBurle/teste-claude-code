@@ -2,6 +2,8 @@
 
 Projeto simples de lista de tarefas em **HTML, CSS e JavaScript puro** (sem frameworks ou dependências externas), criado como primeiro teste com o Claude Code.
 
+🔗 Repositório: [github.com/SaBurle/teste-claude-code](https://github.com/SaBurle/teste-claude-code)
+
 ## Funcionalidades
 
 - Adicionar uma nova tarefa
