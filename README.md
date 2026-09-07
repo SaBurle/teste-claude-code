@@ -8,7 +8,10 @@ Projeto simples de lista de tarefas em **HTML, CSS e JavaScript puro** (sem fram
 
 - Adicionar uma nova tarefa
 - Marcar/desmarcar tarefa como concluída (clicando no checkbox ou no texto)
+- Editar o texto de uma tarefa já criada (clique no ícone ✎, salve com Enter ou clicando fora, cancele com Esc)
 - Remover tarefa
+- Filtrar a lista por Todas / Pendentes / Concluídas
+- Contador de tarefas restantes
 - As tarefas ficam salvas no `localStorage` do navegador (persistem ao recarregar a página)
 
 ## Arquivos do projeto
@@ -39,18 +42,36 @@ start index.html
 
 ## Comandos de terminal usados na criação deste projeto
 
-Este projeto foi criado inteiramente pelo Claude Code usando suas ferramentas de escrita de arquivo (sem necessidade de `npm install` ou dependências). O único comando de terminal utilizado durante a criação foi para conferir se a pasta estava vazia antes de gerar os arquivos:
+Este projeto foi criado inteiramente pelo Claude Code usando suas ferramentas de escrita de arquivo (sem necessidade de `npm install` ou dependências). Os comandos de terminal usados foram:
 
 ```bash
+# Conferir se a pasta estava vazia antes de gerar os arquivos
 ls -la "C:\Users\Samara\Claude\teste-claude-code"
+
+# Inicializar o repositório Git local e criar o primeiro commit
+git init
+git add README.md index.html script.js style.css
+git commit -m "Primeiro commit: lista de tarefas em HTML/CSS/JS puro"
+
+# Instalar o GitHub CLI (necessário para criar o repositório remoto)
+winget install --id GitHub.cli -e
+
+# Autenticar no GitHub
+gh auth login --web -h github.com
+
+# Criar o repositório no GitHub a partir da pasta local e configurar o remoto "origin"
+gh repo create teste-claude-code --public --source=. --remote=origin
+
+# Enviar o código para o GitHub
+git push -u origin master
 ```
 
-Não foi criado repositório Git nesta sessão. Caso queira versionar o projeto futuramente, os comandos básicos seriam:
+A cada nova funcionalidade adicionada depois, o fluxo se repetiu com:
 
 ```bash
-git init
-git add .
-git commit -m "Primeiro commit: lista de tarefas"
+git add <arquivos alterados>
+git commit -m "mensagem descrevendo a mudança"
+git push origin master
 ```
 
 ## Comandos/atalhos úteis do Claude Code (para sessões futuras)
@@ -70,6 +91,6 @@ git commit -m "Primeiro commit: lista de tarefas"
 
 ## Próximos passos possíveis (opcional)
 
-- Adicionar filtro para mostrar apenas tarefas pendentes/concluídas
-- Adicionar contador de tarefas restantes
-- Permitir editar o texto de uma tarefa já criada
+- Reordenar tarefas por arrastar e soltar (drag and drop)
+- Adicionar categorias ou tags às tarefas
+- Modo escuro (dark mode)
