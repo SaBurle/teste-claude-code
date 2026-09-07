@@ -9,6 +9,7 @@ const taskForm = document.getElementById('task-form');
 const taskInput = document.getElementById('task-input');
 const taskList = document.getElementById('task-list');
 const emptyMessage = document.getElementById('empty-message');
+const tasksCounter = document.getElementById('tasks-counter');
 
 // Chave usada para salvar/ler as tarefas no localStorage
 const STORAGE_KEY = 'todo-app-tasks';
@@ -114,6 +115,23 @@ function renderTasks() {
     li.appendChild(removeBtn);
     taskList.appendChild(li);
   });
+
+  updateCounter();
+}
+
+// Atualiza o texto com a quantidade de tarefas ainda não concluídas
+function updateCounter() {
+  const remaining = tasks.filter((task) => !task.completed).length;
+
+  if (tasks.length === 0) {
+    tasksCounter.textContent = '';
+    return;
+  }
+
+  tasksCounter.textContent =
+    remaining === 1
+      ? '1 tarefa restante'
+      : `${remaining} tarefas restantes`;
 }
 
 // ---------------------------------------------------------

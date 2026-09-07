@@ -132,3 +132,11 @@ h1 {
   margin-top: 16px;
   display: none;
 }
+
+/* Contador de tarefas restantes, exibido abaixo da lista */
+#tasks-counter {
+  text-align: center;
+  color: #777;
+  font-size: 0.85rem;
+  margin-top: 16px;
+}
