@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <!-- Configurações básicas da página -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Tarefas</title>
+
+  <!-- Importa o arquivo de estilos -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="app">
+    <h1>Minha Lista de Tarefas</h1>
+
+    <!-- Formulário para adicionar novas tarefas -->
+    <form id="task-form">
+      <input
+        type="text"
+        id="task-input"
+        placeholder="Digite uma nova tarefa..."
+        autocomplete="off"
+      >
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <!-- Lista onde as tarefas serão exibidas dinamicamente pelo JavaScript -->
+    <ul id="task-list"></ul>
+
+    <!-- Mensagem exibida quando não há tarefas -->
+    <p id="empty-message">Nenhuma tarefa por aqui. Adicione a primeira! 🎉</p>
+  </main>
+
+  <!-- Importa o arquivo de lógica (deve vir depois do HTML para garantir que os elementos já existam) -->
+  <script src="script.js"></script>
+</body>
+</html>

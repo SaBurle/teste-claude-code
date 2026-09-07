@@ -1,0 +1,134 @@
+/* Reseta margens e paddings padrão do navegador e define box-sizing consistente */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilo base da página */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f2f4f8;
+  color: #222;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+  min-height: 100vh;
+}
+
+/* Cartão central que contém toda a aplicação */
+.app {
+  background: #ffffff;
+  width: 100%;
+  max-width: 480px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+/* Formulário: input e botão lado a lado */
+#task-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+#task-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+#task-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+#task-form button {
+  padding: 10px 16px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#task-form button:hover {
+  background-color: #357abd;
+}
+
+/* Lista de tarefas: remove marcadores padrão de <ul> */
+#task-list {
+  list-style: none;
+}
+
+/* Cada item (tarefa) da lista */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.task-item:last-child {
+  border-bottom: none;
+}
+
+/* Texto da tarefa */
+.task-text {
+  flex: 1;
+  font-size: 1rem;
+  word-break: break-word;
+  cursor: pointer;
+}
+
+/* Estilo aplicado quando a tarefa está marcada como concluída */
+.task-text.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+/* Botão de remover tarefa */
+.remove-btn {
+  background: none;
+  border: none;
+  color: #e25c5c;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.remove-btn:hover {
+  background-color: #fdeaea;
+}
+
+/* Checkbox de concluído */
+.task-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Mensagem exibida quando a lista está vazia (controlada via JS com display none/block) */
+#empty-message {
+  text-align: center;
+  color: #999;
+  margin-top: 16px;
+  display: none;
+}
