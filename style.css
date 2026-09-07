@@ -131,6 +131,23 @@ h1 {
   color: #999;
 }
 
+/* Botão de editar tarefa */
+.edit-btn {
+  background: none;
+  border: none;
+  color: #4a90e2;
+  font-size: 1.1rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.edit-btn:hover {
+  background-color: #eaf2fd;
+}
+
 /* Botão de remover tarefa */
 .remove-btn {
   background: none;
@@ -146,6 +163,15 @@ h1 {
 
 .remove-btn:hover {
   background-color: #fdeaea;
+}
+
+/* Campo de texto exibido no lugar da tarefa quando ela está sendo editada */
+.task-edit-input {
+  flex: 1;
+  padding: 6px 8px;
+  font-size: 1rem;
+  border: 1px solid #4a90e2;
+  border-radius: 6px;
 }
 
 /* Checkbox de concluído */

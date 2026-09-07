@@ -22,6 +22,9 @@ let tasks = loadTasks();
 // Filtro ativo no momento: 'all', 'pending' ou 'completed'
 let currentFilter = 'all';
 
+// Id da tarefa que está sendo editada no momento (null = nenhuma)
+let editingId = null;
+
 // Renderiza a lista assim que a página carrega
 renderTasks();
 
@@ -90,6 +93,22 @@ function removeTask(id) {
   renderTasks();
 }
 
+// Salva o novo texto de uma tarefa que estava sendo editada
+function editTask(id, newText) {
+  const trimmed = newText.trim();
+
+  // Se o campo ficar vazio, mantém o texto original (não permite tarefa em branco)
+  if (trimmed !== '') {
+    tasks = tasks.map((task) =>
+      task.id === id ? { ...task, text: trimmed } : task
+    );
+    saveTasks();
+  }
+
+  editingId = null;
+  renderTasks();
+}
+
 // ---------------------------------------------------------
 // Renderização (desenha a lista de tarefas na tela)
 // ---------------------------------------------------------
@@ -117,11 +136,50 @@ function renderTasks() {
     checkbox.checked = task.completed;
     checkbox.addEventListener('change', () => toggleTask(task.id));
 
+    li.appendChild(checkbox);
+
+    // Se esta é a tarefa em edição, mostra um campo de texto em vez do texto fixo
+    if (task.id === editingId) {
+      const editInput = document.createElement('input');
+      editInput.type = 'text';
+      editInput.className = 'task-edit-input';
+      editInput.value = task.text;
+
+      // Salva a edição ao perder o foco (clicar fora) ou ao apertar Enter
+      editInput.addEventListener('blur', () => editTask(task.id, editInput.value));
+      editInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+          editInput.blur(); // dispara o "blur" acima, que salva
+        } else if (event.key === 'Escape') {
+          editingId = null; // cancela a edição sem salvar
+          renderTasks();
+        }
+      });
+
+      li.appendChild(editInput);
+      taskList.appendChild(li);
+
+      // Coloca o foco no campo e seleciona o texto para facilitar a edição
+      editInput.focus();
+      editInput.select();
+      return; // pula a criação do texto/botões normais para esta tarefa
+    }
+
     // Texto da tarefa (clicar no texto também alterna concluído/não concluído)
     const span = document.createElement('span');
     span.className = 'task-text' + (task.completed ? ' completed' : '');
     span.textContent = task.text;
     span.addEventListener('click', () => toggleTask(task.id));
+
+    // Botão de editar tarefa
+    const editBtn = document.createElement('button');
+    editBtn.className = 'edit-btn';
+    editBtn.textContent = '✎';
+    editBtn.setAttribute('aria-label', 'Editar tarefa');
+    editBtn.addEventListener('click', () => {
+      editingId = task.id;
+      renderTasks();
+    });
 
     // Botão de remover tarefa
     const removeBtn = document.createElement('button');
@@ -131,8 +189,8 @@ function renderTasks() {
     removeBtn.addEventListener('click', () => removeTask(task.id));
 
     // Monta o item e adiciona à lista na tela
-    li.appendChild(checkbox);
     li.appendChild(span);
+    li.appendChild(editBtn);
     li.appendChild(removeBtn);
     taskList.appendChild(li);
   });
