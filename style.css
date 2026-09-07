@@ -1,3 +1,39 @@
+/* Variáveis de cor do tema claro (padrão) */
+:root {
+  --color-bg: #f2f4f8;
+  --color-card-bg: #ffffff;
+  --color-text: #222;
+  --color-heading: #333;
+  --color-text-secondary: #666;
+  --color-text-muted: #999;
+  --color-border: #ddd;
+  --color-border-light: #eee;
+  --color-accent: #4a90e2;
+  --color-accent-hover: #357abd;
+  --color-accent-bg-hover: #eaf2fd;
+  --color-danger: #e25c5c;
+  --color-danger-bg-hover: #fdeaea;
+  --color-shadow: rgba(0, 0, 0, 0.08);
+}
+
+/* Variáveis de cor do tema escuro, aplicadas quando <html data-theme="dark"> */
+[data-theme='dark'] {
+  --color-bg: #15171b;
+  --color-card-bg: #1e2126;
+  --color-text: #e8e8e8;
+  --color-heading: #f2f2f2;
+  --color-text-secondary: #aaaaaa;
+  --color-text-muted: #7d7d7d;
+  --color-border: #3a3d42;
+  --color-border-light: #2a2d32;
+  --color-accent: #5c9ce6;
+  --color-accent-hover: #79aeeb;
+  --color-accent-bg-hover: #22303f;
+  --color-danger: #e57373;
+  --color-danger-bg-hover: #3a2323;
+  --color-shadow: rgba(0, 0, 0, 0.4);
+}
+
 /* Reseta margens e paddings padrão do navegador e define box-sizing consistente */
 * {
   margin: 0;
@@ -8,29 +44,54 @@
 /* Estilo base da página */
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #f2f4f8;
-  color: #222;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   display: flex;
   justify-content: center;
   padding: 40px 16px;
   min-height: 100vh;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 /* Cartão central que contém toda a aplicação */
 .app {
-  background: #ffffff;
+  background: var(--color-card-bg);
   width: 100%;
   max-width: 480px;
   padding: 24px;
   border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transition: background-color 0.2s;
+}
+
+/* Cabeçalho: título e botão de tema lado a lado */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 h1 {
   font-size: 1.4rem;
-  margin-bottom: 20px;
   text-align: center;
-  color: #333;
+  color: var(--color-heading);
+}
+
+/* Botão de alternar tema claro/escuro */
+#theme-toggle {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 1.1rem;
+  line-height: 1;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+#theme-toggle:hover {
+  border-color: var(--color-accent);
 }
 
 /* Formulário: input e botão lado a lado */
@@ -43,19 +104,21 @@ h1 {
 #task-input {
   flex: 1;
   padding: 10px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 1rem;
+  background-color: var(--color-card-bg);
+  color: var(--color-text);
 }
 
 #task-input:focus {
   outline: none;
-  border-color: #4a90e2;
+  border-color: var(--color-accent);
 }
 
 #task-form button {
   padding: 10px 16px;
-  background-color: #4a90e2;
+  background-color: var(--color-accent);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -65,7 +128,7 @@ h1 {
 }
 
 #task-form button:hover {
-  background-color: #357abd;
+  background-color: var(--color-accent-hover);
 }
 
 /* Grupo de botões de filtro (Todas / Pendentes / Concluídas) */
@@ -79,23 +142,23 @@ h1 {
   flex: 1;
   padding: 6px 10px;
   background: none;
-  border: 1px solid #ddd;
+  border: 1px solid var(--color-border);
   border-radius: 8px;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--color-text-secondary);
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s, color 0.2s;
 }
 
 .filter-btn:hover {
-  border-color: #4a90e2;
-  color: #4a90e2;
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 /* Botão do filtro atualmente selecionado */
 .filter-btn.active {
-  background-color: #4a90e2;
-  border-color: #4a90e2;
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
   color: #fff;
 }
 
@@ -110,7 +173,7 @@ h1 {
   align-items: center;
   gap: 10px;
   padding: 10px 8px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-light);
 }
 
 .task-item:last-child {
@@ -128,14 +191,14 @@ h1 {
 /* Estilo aplicado quando a tarefa está marcada como concluída */
 .task-text.completed {
   text-decoration: line-through;
-  color: #999;
+  color: var(--color-text-muted);
 }
 
 /* Botão de editar tarefa */
 .edit-btn {
   background: none;
   border: none;
-  color: #4a90e2;
+  color: var(--color-accent);
   font-size: 1.1rem;
   cursor: pointer;
   line-height: 1;
@@ -145,14 +208,14 @@ h1 {
 }
 
 .edit-btn:hover {
-  background-color: #eaf2fd;
+  background-color: var(--color-accent-bg-hover);
 }
 
 /* Botão de remover tarefa */
 .remove-btn {
   background: none;
   border: none;
-  color: #e25c5c;
+  color: var(--color-danger);
   font-size: 1.1rem;
   cursor: pointer;
   line-height: 1;
@@ -162,7 +225,7 @@ h1 {
 }
 
 .remove-btn:hover {
-  background-color: #fdeaea;
+  background-color: var(--color-danger-bg-hover);
 }
 
 /* Campo de texto exibido no lugar da tarefa quando ela está sendo editada */
@@ -170,8 +233,10 @@ h1 {
   flex: 1;
   padding: 6px 8px;
   font-size: 1rem;
-  border: 1px solid #4a90e2;
+  border: 1px solid var(--color-accent);
   border-radius: 6px;
+  background-color: var(--color-card-bg);
+  color: var(--color-text);
 }
 
 /* Checkbox de concluído */
@@ -185,7 +250,7 @@ h1 {
 /* Mensagem exibida quando a lista está vazia (controlada via JS com display none/block) */
 #empty-message {
   text-align: center;
-  color: #999;
+  color: var(--color-text-muted);
   margin-top: 16px;
   display: none;
 }
@@ -193,7 +258,7 @@ h1 {
 /* Contador de tarefas restantes, exibido abaixo da lista */
 #tasks-counter {
   text-align: center;
-  color: #777;
+  color: var(--color-text-secondary);
   font-size: 0.85rem;
   margin-top: 16px;
 }

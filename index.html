@@ -8,11 +8,26 @@
 
   <!-- Importa o arquivo de estilos -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Aplica o tema salvo antes da página desenhar, evitando um "flash" da cor errada -->
+  <script>
+    (function () {
+      const saved = localStorage.getItem('todo-app-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 <body>
 
   <main class="app">
-    <h1>Minha Lista de Tarefas</h1>
+    <div class="app-header">
+      <h1>Minha Lista de Tarefas</h1>
+
+      <!-- Botão para alternar entre modo claro e escuro -->
+      <button type="button" id="theme-toggle" aria-label="Alternar modo escuro">🌙</button>
+    </div>
 
     <!-- Formulário para adicionar novas tarefas -->
     <form id="task-form">

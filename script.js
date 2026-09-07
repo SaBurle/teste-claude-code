@@ -11,6 +11,10 @@ const taskList = document.getElementById('task-list');
 const emptyMessage = document.getElementById('empty-message');
 const tasksCounter = document.getElementById('tasks-counter');
 const filterButtons = document.querySelectorAll('.filter-btn');
+const themeToggle = document.getElementById('theme-toggle');
+
+// Chave usada para salvar a preferência de tema (claro/escuro) no localStorage
+const THEME_STORAGE_KEY = 'todo-app-theme';
 
 // Chave usada para salvar/ler as tarefas no localStorage
 const STORAGE_KEY = 'todo-app-tasks';
@@ -25,12 +29,24 @@ let currentFilter = 'all';
 // Id da tarefa que está sendo editada no momento (null = nenhuma)
 let editingId = null;
 
-// Renderiza a lista assim que a página carrega
+// Renderiza a lista e o ícone do botão de tema assim que a página carrega
 renderTasks();
+updateThemeIcon();
 
 // ---------------------------------------------------------
 // Eventos
 // ---------------------------------------------------------
+
+// Clique no botão de alternar entre modo claro e escuro
+themeToggle.addEventListener('click', () => {
+  // O tema atual já foi aplicado em <html> por um script no <head> (evita "flash" de cor errada)
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const newTheme = isDark ? 'light' : 'dark';
+
+  document.documentElement.setAttribute('data-theme', newTheme);
+  localStorage.setItem(THEME_STORAGE_KEY, newTheme);
+  updateThemeIcon();
+});
 
 // Clique em um dos botões de filtro (Todas / Pendentes / Concluídas)
 filterButtons.forEach((button) => {
@@ -241,6 +257,12 @@ function updateCounter() {
     remaining === 1
       ? '1 tarefa restante'
       : `${remaining} tarefas restantes`;
+}
+
+// Atualiza o ícone do botão de tema (lua para ativar o escuro, sol para voltar ao claro)
+function updateThemeIcon() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  themeToggle.textContent = isDark ? '☀️' : '🌙';
 }
 
 // ---------------------------------------------------------
