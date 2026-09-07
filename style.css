@@ -68,6 +68,37 @@ h1 {
   background-color: #357abd;
 }
 
+/* Grupo de botões de filtro (Todas / Pendentes / Concluídas) */
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 6px 10px;
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #666;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.filter-btn:hover {
+  border-color: #4a90e2;
+  color: #4a90e2;
+}
+
+/* Botão do filtro atualmente selecionado */
+.filter-btn.active {
+  background-color: #4a90e2;
+  border-color: #4a90e2;
+  color: #fff;
+}
+
 /* Lista de tarefas: remove marcadores padrão de <ul> */
 #task-list {
   list-style: none;

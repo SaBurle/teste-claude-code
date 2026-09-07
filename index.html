@@ -25,6 +25,13 @@
       <button type="submit">Adicionar</button>
     </form>
 
+    <!-- Filtro para exibir todas as tarefas, só pendentes ou só concluídas -->
+    <div id="filters" class="filters">
+      <button type="button" class="filter-btn active" data-filter="all">Todas</button>
+      <button type="button" class="filter-btn" data-filter="pending">Pendentes</button>
+      <button type="button" class="filter-btn" data-filter="completed">Concluídas</button>
+    </div>
+
     <!-- Lista onde as tarefas serão exibidas dinamicamente pelo JavaScript -->
     <ul id="task-list"></ul>
 

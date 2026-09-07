@@ -10,6 +10,7 @@ const taskInput = document.getElementById('task-input');
 const taskList = document.getElementById('task-list');
 const emptyMessage = document.getElementById('empty-message');
 const tasksCounter = document.getElementById('tasks-counter');
+const filterButtons = document.querySelectorAll('.filter-btn');
 
 // Chave usada para salvar/ler as tarefas no localStorage
 const STORAGE_KEY = 'todo-app-tasks';
@@ -18,12 +19,28 @@ const STORAGE_KEY = 'todo-app-tasks';
 // Cada tarefa é um objeto: { id, text, completed }
 let tasks = loadTasks();
 
+// Filtro ativo no momento: 'all', 'pending' ou 'completed'
+let currentFilter = 'all';
+
 // Renderiza a lista assim que a página carrega
 renderTasks();
 
 // ---------------------------------------------------------
 // Eventos
 // ---------------------------------------------------------
+
+// Clique em um dos botões de filtro (Todas / Pendentes / Concluídas)
+filterButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    currentFilter = button.dataset.filter;
+
+    // Atualiza qual botão aparece destacado como "ativo"
+    filterButtons.forEach((btn) => btn.classList.remove('active'));
+    button.classList.add('active');
+
+    renderTasks();
+  });
+});
 
 // Captura o envio do formulário (botão "Adicionar" ou tecla Enter)
 taskForm.addEventListener('submit', (event) => {
@@ -81,10 +98,14 @@ function renderTasks() {
   // Limpa a lista atual antes de redesenhar
   taskList.innerHTML = '';
 
-  // Mostra ou esconde a mensagem de "lista vazia"
-  emptyMessage.style.display = tasks.length === 0 ? 'block' : 'none';
+  // Aplica o filtro selecionado (Todas / Pendentes / Concluídas)
+  const visibleTasks = getFilteredTasks();
 
-  tasks.forEach((task) => {
+  // Mostra ou esconde a mensagem de "lista vazia", com o texto certo para o filtro atual
+  emptyMessage.style.display = visibleTasks.length === 0 ? 'block' : 'none';
+  emptyMessage.textContent = getEmptyMessageText();
+
+  visibleTasks.forEach((task) => {
     // Cria o <li> que representa a tarefa
     const li = document.createElement('li');
     li.className = 'task-item';
@@ -117,6 +138,36 @@ function renderTasks() {
   });
 
   updateCounter();
+}
+
+// Retorna apenas as tarefas que devem aparecer de acordo com o filtro ativo
+function getFilteredTasks() {
+  if (currentFilter === 'pending') {
+    return tasks.filter((task) => !task.completed);
+  }
+
+  if (currentFilter === 'completed') {
+    return tasks.filter((task) => task.completed);
+  }
+
+  return tasks; // filtro 'all'
+}
+
+// Escolhe a mensagem exibida quando não há tarefas para mostrar no filtro atual
+function getEmptyMessageText() {
+  if (tasks.length === 0) {
+    return 'Nenhuma tarefa por aqui. Adicione a primeira! 🎉';
+  }
+
+  if (currentFilter === 'pending') {
+    return 'Nenhuma tarefa pendente. Bom trabalho! ✅';
+  }
+
+  if (currentFilter === 'completed') {
+    return 'Nenhuma tarefa concluída ainda.';
+  }
+
+  return '';
 }
 
 // Atualiza o texto com a quantidade de tarefas ainda não concluídas
