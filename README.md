@@ -12,6 +12,7 @@ Projeto simples de lista de tarefas em **HTML, CSS e JavaScript puro** (sem fram
 - Remover tarefa
 - Filtrar a lista por Todas / Pendentes / Concluídas
 - Contador de tarefas restantes
+- Modo escuro (clique no ícone 🌙/☀️ no canto superior do card; a preferência fica salva e respeita o tema do sistema por padrão)
 - As tarefas ficam salvas no `localStorage` do navegador (persistem ao recarregar a página)
 
 ## Arquivos do projeto
@@ -93,4 +94,3 @@ git push origin master
 
 - Reordenar tarefas por arrastar e soltar (drag and drop)
 - Adicionar categorias ou tags às tarefas
-- Modo escuro (dark mode)
